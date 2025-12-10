@@ -1,8 +1,12 @@
 package code;
+
+import java.util.Scanner;
+
 class Person {
     private String name;
     private int energy;
     private int health;
+    Scanner input = new Scanner(System.in);
     /*
     * Constructor for objects of class Person
     * @param theName The name of the person
@@ -30,6 +34,26 @@ class Person {
     }
     public void setHealth(int newHealth){
         this.health = newHealth;
+    }
+    public void Walmart(){
+        this.energy -= 10;
+        this.health += 10;
+        System.out.println("You went to Walmart. Energy -10, Health +10.");
+        System.out.println("You encounter a zombie while leaving Walmart!\nDo you want to fight(1) or run(2)?");
+        int walChoice = input.nextInt();
+        if (walChoice == 1){
+            this.health -= 15;
+            System.out.println("You fought the zombie and won! Health -15.");
+        }
+        else if (walChoice == 2){
+            this.energy -= 20;
+            System.out.println("You ran away from the zombie! Energy -20.");
+        }
+        else {
+            System.out.println("Invalid input. You hesitated and the zombie attacked you! Health -20.");
+            this.health -= 20;
+        }
+
     }
 
 }

@@ -8,6 +8,7 @@ public class Main {
         int nights = 0;
         System.out.println("Enter your name: ");
         String name = input.nextLine();
+        clear();
         System.out.println("What character do you want to be?");
         System.out.println("1. Scavenger\n2. Medic\n3. Warrior");
         int role = input.nextInt();
@@ -15,6 +16,7 @@ public class Main {
             System.out.println("Invalid input. Please enter 1, 2, or 3.");
             role = input.nextInt();
         }
+        clear();
 
         Person player = null;
 
@@ -29,6 +31,7 @@ public class Main {
                 player = new Warrior(name);
                 break;
         }
+        clear();
         System.out.println("Your player has found a weapon!");
         player.setWeapon(new Weapon(5));
         player.weaponInfo();
@@ -40,5 +43,9 @@ public class Main {
                 break;
             }
         }
+    }
+    public static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

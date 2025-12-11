@@ -6,6 +6,7 @@ class Person {
     private String name;
     private int energy;
     private int health;
+    private Weapon weapon;
     Scanner input = new Scanner(System.in);
     /*
     * Constructor for objects of class Person
@@ -17,11 +18,19 @@ class Person {
         health = 100;
         System.out.println("Welcome " + name + " to the zombie apocalypse!");
     }
-    public void printInfo() {
+    public void personInfo() {
         System.out.println("Player Information:");
         System.out.println("Name: " + this.getName());
         System.out.println("Energy: " + this.getEnergy());
         System.out.println("Health: " + this.getHealth()+"\n");
+    }
+    public void setWeapon(Weapon newWeapon){
+        this.weapon = newWeapon;
+    }
+    public void weaponInfo() {
+        System.out.println("Weapon Information:");
+        System.out.println("Name: " + this.weapon.getName());
+        System.out.println("Damage: " + this.weapon.getDamage()+"\n");
     }
     public String getName() {
         return name;
@@ -41,17 +50,19 @@ class Person {
         System.out.println("You went to Walmart. Energy -10, Health +10.");
         System.out.println("You encounter a zombie while leaving Walmart!\nDo you want to fight(1) or run(2)?");
         int walChoice = input.nextInt();
-        if (walChoice == 1){
-            this.health -= 15;
-            System.out.println("You fought the zombie and won! Health -15.");
-        }
-        else if (walChoice == 2){
-            this.energy -= 20;
-            System.out.println("You ran away from the zombie! Energy -20.");
-        }
-        else {
-            System.out.println("Invalid input. You hesitated and the zombie attacked you! Health -20.");
-            this.health -= 20;
+        switch (walChoice) {
+            case 1:
+                this.health -= 15;
+                System.out.println("You fought the zombie and won! Health -15.");
+                break;
+            case 2:
+                this.energy -= 20;
+                System.out.println("You ran away from the zombie! Energy -20.");
+                break;
+            default:
+                System.out.println("Invalid input. You hesitated and the zombie attacked you! Health -20.");
+                this.health -= 20;
+                break;
         }
 
     }

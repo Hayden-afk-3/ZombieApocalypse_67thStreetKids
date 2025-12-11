@@ -44,6 +44,9 @@ class Person {
     public void setHealth(int newHealth){
         this.health = newHealth;
     }
+    public void setEnergy(int newEnergy){
+        this.energy = newEnergy;
+    }
     public void Walmart(){
         this.energy -= 10;
         this.health += 10;

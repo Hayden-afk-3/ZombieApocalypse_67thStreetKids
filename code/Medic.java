@@ -1,5 +1,6 @@
 package code;
 class Medic extends Person{
+    public String[] activityListClass = {"Heal Self"};
     public Medic(String theName) {
         super(theName);
     }

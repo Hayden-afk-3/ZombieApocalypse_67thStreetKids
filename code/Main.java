@@ -38,6 +38,8 @@ public class Main {
         while (true) {
             // Game loop logic goes here
             nights++;
+            System.out.println();
+            input.nextLine();
             if (player.getHealth() <= 0 || player.getEnergy() <= 0) {
                 System.out.println("Game Over! You survived " + nights + " nights.");
                 break;

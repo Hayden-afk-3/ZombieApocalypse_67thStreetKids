@@ -8,6 +8,7 @@ class Person {
     private int health;
     private Weapon weapon;
     Scanner input = new Scanner(System.in);
+    public String[] activityList = {"Scavenge Walmart","Take a Nap"};
     /*
     * Constructor for objects of class Person
     * @param theName The name of the person
@@ -44,8 +45,14 @@ class Person {
     public void setHealth(int newHealth){
         this.health = newHealth;
     }
-    public void setEnergy(int newEnergy){
-        this.energy = newEnergy;
+    public static String printActivity(){
+        String returnString = "";
+        returnString += "Here are your options.";
+        for (int i = 1; i <= (this.activityList).length()+(this.activityListClass).length(); i++) {
+
+
+        }
+        return returnString;
     }
     public void Walmart(){
         this.energy -= 10;

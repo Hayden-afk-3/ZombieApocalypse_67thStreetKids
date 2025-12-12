@@ -2,13 +2,13 @@ package code;
 
 import java.util.Scanner;
 
-class Person {
+abstract class Person {
     private String name;
     private int energy;
     private int health;
     private Weapon weapon;
     Scanner input = new Scanner(System.in);
-    public String[] activityList = {"Scavenge Walmart","Take a Nap"};
+    public static String[] activityList = {"Scavenge Walmart","Take a Nap"};
     /*
     * Constructor for objects of class Person
     * @param theName The name of the person
@@ -30,8 +30,8 @@ class Person {
     }
     public void weaponInfo() {
         System.out.println("Weapon Information:");
-        System.out.println("Name: " + this.weapon.getName());
-        System.out.println("Damage: " + this.weapon.getDamage()+"\n");
+        System.out.println("\tName: " + this.weapon.getName());
+        System.out.println("\tDamage: " + this.weapon.getDamage()+"\n");
     }
     public String getName() {
         return name;
@@ -45,14 +45,20 @@ class Person {
     public void setHealth(int newHealth){
         this.health = newHealth;
     }
-    public static String printActivity(){
-        String returnString = "";
-        returnString += "Here are your options.";
-        for (int i = 1; i <= (this.activityList).length()+(this.activityListClass).length(); i++) {
-
-
+    public void setEnergy(int newEnergy){
+        this.energy = newEnergy;
+    }
+    public abstract String[] getActivityListClass();
+    public void printActivityList(){
+        int i = 1;
+        System.out.println("Here are your activity options:");
+        for (; i <= activityList.length; i++){
+            System.out.println("\t" + i + ": " + activityList[i-1]);
         }
-        return returnString;
+        for (; i <= this.getActivityListClass().length + activityList.length; i++){
+            System.out.println("\t" + i + ": " + this.getActivityListClass()[i-1-activityList.length]);
+        }
+        System.out.println("\t?: Explain choices");
     }
     public void Walmart(){
         this.energy -= 10;

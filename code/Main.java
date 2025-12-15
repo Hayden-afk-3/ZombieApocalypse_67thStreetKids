@@ -3,6 +3,7 @@ package code;
 import java.util.Scanner;
 
 public class Main {
+    private static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int day = 0;
@@ -43,7 +44,10 @@ public class Main {
             System.out.println("Day " + day);
             player.personStatus();
             player.printActivityList();
-            input.nextLine();
+            continueGame();
+            
+            player.sleepEnergy();
+            day++;
         }
         input.close();
     }
@@ -52,10 +56,8 @@ public class Main {
         System.out.flush();
     }
     public static void continueGame(){
-        Scanner input = new Scanner(System.in);
-        System.out.println("Press Enter to continue...");
+        System.out.print("Press Enter to continue...");
         input.nextLine();
-        clear();
-        input.close();
+        //clear();
     }
 }

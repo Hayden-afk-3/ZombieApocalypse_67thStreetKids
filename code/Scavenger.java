@@ -1,7 +1,7 @@
 package code;
 class Scavenger extends Person{
     private  String[] activityListClass = {"Scavenge Bass Pro Shops"};
-    private  String[] activityListExplainClass = {"High chance to find good loot. High possibility of finding zombies."};
+    private  String[] activityListExplainClass = {"High chance to find good loot. High chance of finding zombies."};
     public Scavenger(String theName) {
         super(theName);
     }

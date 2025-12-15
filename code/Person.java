@@ -64,6 +64,11 @@ abstract class Person {
     public void setEnergy(int newEnergy){
         this.energy = newEnergy;
     }
+    public void sleep(){
+        this.energy = (int)(Math.random()*((this.energy/2.0+50)-this.energy+1)+this.energy);
+        this.health = (int)(Math.random()*((this.energy-0.01(this.energy)(this.energy))-this.energy+1)+this.energy);
+        this.energy = (int)(Math.random()*((this.energy/2.0+50)-this.energy+1)+this.energy);
+    }
     public void setSatiation(int newSatiation){
         this.satiation = newSatiation;
     }

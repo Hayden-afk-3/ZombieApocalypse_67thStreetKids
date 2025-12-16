@@ -85,7 +85,19 @@ abstract class Person {
             System.out.println("\t\t" + this.getActivityListExplainClass()[i-1-activityList.length]);
         }
     }
-    public void zombieFight() {
-
+    public void zombieFight(int day) {
+        System.out.println("You ran into a zombie!");
+        Zombie zombie = new Zombie((int)(5*Math.log(day)+4),(int)(4*Math.log(day)+2));
+        while (zombie.getHealth()>0){
+            int zombieAttack = (int)(zombie.getDamage()*(0.5*Math.random()+0.75));
+            if (this.health-zombieAttack<0){
+                break;
+            }
+            System.out.println("Zombie attacks!\n\t"+this.name+"'s Health: "+this.health+" -" + zombieAttack);
+            this.health -= zombieAttack;
+            int playerAttack = (int)(this.weapon.getDamage()*(0.5*Math.random()+0.75));
+            System.out.println("Player attacks!\n\t"+this.name+"'s Health: "+this.health+" -" + playerAttack);
+            zombie.setHealth(zombie.getHealth()-playerAttack);
+        }
     }
 }

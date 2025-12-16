@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
-        int day = 0;
+        int day = 1;
         int choice;
 
         System.out.print("Enter your name: ");
@@ -39,16 +39,7 @@ public class Main {
         continueGame();
 
         while (true){
-            if (player.getEnergy()<=0){
-                System.out.println(name+" has ran out of energy! \nThey fell over and died from being exhausted on Day " + day + ".");
-                break;
-            }
-            if (player.getHealth()<=0){
-                System.out.println(name+" has ran out of health! \nThey fell over and died from their injuries on Day " + day + ".");
-                break;
-            }
-            if (player.getSatiation()<=0){
-                System.out.println(name+" has ran out of satiation! \nThey fell over and died from starvation on Day " + day + ".");
+            if (checkDeath(player,day)){
                 break;
             }
             System.out.println("Day " + day);
@@ -57,6 +48,11 @@ public class Main {
             System.out.print("Activity #: ");
             choice = input.nextInt();
             player.parseActivity(choice);
+            player.zombieFight(day);
+            if (player.getHealth()<=0){
+                System.out.println(player.getName()+" has ran out of health! \nThey fell over and died from their injuries on Day " + day + ".");
+                break;
+            }
             continueGame();
             
             player.sleep();
@@ -73,5 +69,22 @@ public class Main {
         System.out.print("Press Enter to continue...");
         input.nextLine();
         clear();
+    }
+    public static boolean checkDeath(Person player, int day){
+        if (player.getHealth()<=0){
+            System.out.println(player.getName()+" has ran out of health! \nThey fell over and died from their injuries on Day " + day + ".");
+            return true;
+        }
+        else if (player.getSatiation()<=0){
+            System.out.println(player.getName()+" has ran out of satiation! \nThey fell over and died from starvation on Day " + day + ".");
+            return true;
+        }
+        else if (player.getEnergy()<=0){
+            System.out.println(player.getName()+" has ran out of energy! \nThey fell over and died from being exhausted on Day " + day + ".");
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

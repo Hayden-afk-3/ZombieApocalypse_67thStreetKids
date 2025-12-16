@@ -6,15 +6,13 @@ class Medic extends Person{
         super(theName);
     }
     public void healSelf() {
-        int healAmount = (int)(Math.random()*11+5);
+        int healAmount = (int)(Math.random()*(6)+3);
         if (healAmount+this.getHealth()>100){
             healAmount=100-this.getHealth();
-            System.out.println("You have healed for " + healAmount + " health points. Your health is now full at 100.");
-        } 
-        else {
-            this.setHealth(healAmount+this.getHealth());
-            System.out.println("You have healed for " + healAmount + " health points. Your health is now " + (this.getHealth()+healAmount) + ".");
         }
+        System.out.println(this.getName()+" starts to heal themselves.");
+        System.out.println("\tHealth: " + this.getHealth() + " +" + healAmount + " --> " + (this.getHealth()+healAmount));
+        this.setHealth(this.getHealth()+healAmount);
     }
     @Override
     public String[] getActivityListClass() {

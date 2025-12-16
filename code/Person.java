@@ -62,7 +62,7 @@ abstract class Person {
         this.energy = newEnergy;
     }
     public void sleep(){
-        System.out.println(this.name + " starts to fall asleep.");
+        System.out.println("The sun sets and " + this.name + " starts to fall asleep.");
         int startEnergy = this.energy;
         int startHealth = this.health;
         int startSatiation = this.satiation;

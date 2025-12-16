@@ -6,10 +6,9 @@ public class Main {
     private static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         int day = 0;
-        boolean gameOver = false;
         int choice;
 
-        System.out.println("Enter your name: ");
+        System.out.print("Enter your name: ");
         String name = input.nextLine();
         clear();
 
@@ -18,6 +17,7 @@ public class Main {
         int role = input.nextInt();
         while (role != 1 && role != 2 && role != 3) {
             System.out.println("Invalid input. Please enter 1, 2, or 3.");
+            role = input.nextInt();
         }
         Person player = null;
         switch (role) {
@@ -33,12 +33,24 @@ public class Main {
         }
         clear();
 
-        System.out.println(name + " has found a weapon!");
+        System.out.println(player.getName() + " has found a weapon!");
         player.setWeapon(new Weapon(5));
         player.weaponInfo();
         continueGame();
 
-        while (!gameOver){
+        while (true){
+            if (player.getEnergy()<=0){
+                System.out.println(name+" has ran out of energy! \nThey fell over and died from being exhausted on Day " + day + ".");
+                break;
+            }
+            if (player.getHealth()<=0){
+                System.out.println(name+" has ran out of health! \nThey fell over and died from their injuries on Day " + day + ".");
+                break;
+            }
+            if (player.getSatiation()<=0){
+                System.out.println(name+" has ran out of satiation! \nThey fell over and died from starvation on Day " + day + ".");
+                break;
+            }
             System.out.println("Day " + day);
             player.personStatus();
             player.printActivityList();

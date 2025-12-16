@@ -12,15 +12,15 @@ abstract class Person {
     public static String[] activityList = {"Scavenge Walmart","Take a Nap"};
     public static String[] activityListExplain = {"Attempt to loot. Possibility of finding zombies.","Regain Energy"};
 
-    /*
-    * Constructor for objects of class Person
-    * @param theName The name of the person
-    */
+    public abstract String[] getActivityListClass();
+    public abstract String[] getActivityListExplainClass();
+    public abstract void parseActivity(int choice);
+
     public Person(String theName) {
         name = theName;
-        energy = (int)(Math.random()*40+60); // 60-99
-        health = (int)(Math.random()*20+70); // 70-89
-        satiation = (int)(Math.random()*30+40); // 40-69
+        energy = (int)(Math.random()*(99-60+1)+60); // 60-99
+        health = (int)(Math.random()*(89-70+1)+70); // 70-89
+        satiation = (int)(Math.random()*(69-40+1)+40); // 40-69
     }
     public void personInfo() {
         System.out.println("Player Information:");
@@ -65,15 +65,17 @@ abstract class Person {
         this.energy = newEnergy;
     }
     public void sleep(){
-        this.energy = (int)(Math.random()*((this.energy/2.0+50)-this.energy+1)+this.energy);
-        this.health = (int)(Math.random()*((this.energy-0.01(this.energy)(this.energy))-this.energy+1)+this.energy);
-        this.energy = (int)(Math.random()*((this.energy/2.0+50)-this.energy+1)+this.energy);
+        this.energy = (int)(Math.random()*((this.energy/2.0+49)-this.energy+1)+this.energy);
+        this.health = (int)(Math.random()*(-0.0109*(this.health-100)*(this.health-100)+99-this.health+1)+this.health);
+        this.satiation = (int)(Math.random()*(0.85*(this.satiation-10)-this.satiation+1)+this.satiation);
     }
     public void setSatiation(int newSatiation){
         this.satiation = newSatiation;
     }
-    public abstract String[] getActivityListClass();
-    public abstract String[] getActivityListExplainClass();
+    public void scavengeWalmart(){
+    }
+    public void takeANap(){
+    }
     public void printActivityList(){
         int i = 1;
         System.out.println("Here are your activity options:");
@@ -86,27 +88,4 @@ abstract class Person {
             System.out.println("\t\t" + this.getActivityListExplainClass()[i-1-activityList.length]);
         }
     }
-    public void Walmart(){
-        this.energy -= 10;
-        this.health += 10;
-        System.out.println("You went to Walmart. Energy -10, Health +10.");
-        System.out.println("You encounter a zombie while leaving Walmart!\nDo you want to fight(1) or run(2)?");
-        int walChoice = input.nextInt();
-        switch (walChoice) {
-            case 1:
-                this.health -= 15;
-                System.out.println("You fought the zombie and won! Health -15.");
-                break;
-            case 2:
-                this.energy -= 20;
-                System.out.println("You ran away from the zombie! Energy -20.");
-                break;
-            default:
-                System.out.println("Invalid input. You hesitated and the zombie attacked you! Health -20.");
-                this.health -= 20;
-                break;
-        }
-
-    }
-
 }

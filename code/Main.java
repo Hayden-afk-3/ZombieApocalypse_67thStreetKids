@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class Main {
     private static final Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         int day = 0;
-        String choice = "";
         boolean gameOver = false;
+        int choice;
 
         System.out.println("Enter your name: ");
         String name = input.nextLine();
@@ -19,7 +18,6 @@ public class Main {
         int role = input.nextInt();
         while (role != 1 && role != 2 && role != 3) {
             System.out.println("Invalid input. Please enter 1, 2, or 3.");
-            role = input.nextInt();
         }
         Person player = null;
         switch (role) {
@@ -44,9 +42,10 @@ public class Main {
             System.out.println("Day " + day);
             player.personStatus();
             player.printActivityList();
+            choice = input.nextInt();
             continueGame();
             
-            player.sleepEnergy();
+            player.sleep();
             day++;
         }
         input.close();

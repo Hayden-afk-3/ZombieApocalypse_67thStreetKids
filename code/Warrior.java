@@ -5,6 +5,8 @@ class Warrior extends Person{
     public Warrior(String theName) {
         super(theName);
     }
+    public void huntForFood() {
+    }
     @Override
     public String[] getActivityListClass() {
         return activityListClass;
@@ -12,5 +14,19 @@ class Warrior extends Person{
     @Override
     public String[] getActivityListExplainClass() {
         return activityListExplainClass;
+    }
+    @Override
+    public void parseActivity(int choice) {
+        switch (choice) {
+            case 1:
+                this.scavengeWalmart();
+                break;
+            case 2:
+                this.takeANap();
+                break;
+            case 3:
+                this.huntForFood();
+                break;
+        }
     }
 }

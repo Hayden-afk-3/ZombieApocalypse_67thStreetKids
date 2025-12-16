@@ -5,7 +5,7 @@ class Medic extends Person{
     public Medic(String theName) {
         super(theName);
     }
-    public void heal() {
+    public void healSelf() {
         int healAmount = (int)(Math.random()*11+5);
         if (healAmount+this.getHealth()>100){
             healAmount=100-this.getHealth();
@@ -16,7 +16,6 @@ class Medic extends Person{
             System.out.println("You have healed for " + healAmount + " health points. Your health is now " + (this.getHealth()+healAmount) + ".");
         }
     }
-
     @Override
     public String[] getActivityListClass() {
         return activityListClass;
@@ -24,5 +23,19 @@ class Medic extends Person{
     @Override
     public String[] getActivityListExplainClass() {
         return activityListExplainClass;
+    }
+    @Override
+    public void parseActivity(int choice) {
+        switch (choice) {
+            case 1:
+                this.scavengeWalmart();
+                break;
+            case 2:
+                this.takeANap();
+                break;
+            case 3:
+                this.healSelf();
+                break;
+        }
     }
 }

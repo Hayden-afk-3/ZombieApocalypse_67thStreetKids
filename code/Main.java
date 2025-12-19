@@ -45,7 +45,7 @@ public class Main {
         // player gets assigned weapon
         System.out.println(player.getName() + " has found a weapon!");
         player.setWeapon(new Weapon(5));
-        player.weaponInfo();
+        player.getWeapon().weaponInfo();
         continueGame();
 
         // main game loop
@@ -64,6 +64,7 @@ public class Main {
 
             // activity choice is parsed into it's respective method
             player.parseActivity(choice);
+            continueGame();
             player.zombieFight(day);
 
             // if player died from zombie fight, break loop

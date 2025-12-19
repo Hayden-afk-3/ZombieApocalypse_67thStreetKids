@@ -24,6 +24,14 @@ public class Weapon {
     }
 
     /**
+     * Prints the weapon information
+     */
+    public void weaponInfo() {
+        System.out.println("\tName: " + name);
+        System.out.println("\tDamage: " + damage);
+    }
+
+    /**
      * Gets the name of the weapon
      * @return name of the weapon
      */
@@ -37,5 +45,13 @@ public class Weapon {
      */
     public int getDamage(){
         return damage;
+    }
+    
+    /**
+     * Sets the damage of the weapon
+     * @param theDamage new damage value for the weapon
+     */
+    public void setDamage(int theDamage){
+        damage = theDamage;
     }
 }

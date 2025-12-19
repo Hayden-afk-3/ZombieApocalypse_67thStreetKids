@@ -66,15 +66,6 @@ abstract class Person {
     }
 
     /**
-     * Prints the person's weapon information
-     */
-    public void weaponInfo() {
-        System.out.println("Weapon Information:");
-        System.out.println("\tName: " + this.weapon.getName());
-        System.out.println("\tDamage: " + this.weapon.getDamage());
-    }
-
-    /**
      * Gets the person's name
      * @return person's name
      */
@@ -136,7 +127,7 @@ abstract class Person {
         this.health = (int)(Math.random()*(-0.0109*(this.health-100)*(this.health-100)+99-this.health+1)+this.health);
         this.satiation = (int)(Math.random()*(0.85*(this.satiation-10)-this.satiation+1)+this.satiation);
 
-        System.out.println("You feel rested.");
+        System.out.println(this.name + " feels rested.");
         System.out.println("\tHealth: " + startHealth + " +" + (this.health-startHealth) + " --> " + this.health);
         System.out.println("\tEnergy: " + startEnergy + " +" + (this.energy-startEnergy) + " --> " + this.energy);
         System.out.println("\tSatiation: " + startSatiation + " -" + (startSatiation-this.satiation) + " --> " + this.satiation);
@@ -154,6 +145,12 @@ abstract class Person {
      * Simulates scavenging Walmart
      */
     public void scavengeWalmart(){
+        System.out.println(this.name + " starts to scavenge Walmart.");
+        int startHealth = this.health;
+        int startEnergy = this.energy;
+        int startSatiation = this.satiation;
+
+        System.out.println("Would you like to look for \n\t1. Food\n\t2. Weapon\n\t3. Supplies");
     }
 
     /**
@@ -164,13 +161,12 @@ abstract class Person {
         System.out.println(this.name + " starts to take a nap.");
         int startEnergy = this.energy;
         int startHealth = this.health;
-        int startSatiation = this.satiation;
 
         this.energy = (int)(Math.random()*((this.energy/2.0+49)-this.energy+1)+this.energy);
         this.health = (int)(Math.random()*(-0.0109*(this.health-100)*(this.health-100)+99-this.health+1)+this.health);
         this.satiation = (int)(Math.random()*(0.85*(this.satiation-10)-this.satiation+1)+this.satiation);
 
-        System.out.println("You feel rested.");
+        System.out.println(this.name + " feels rested.");
         System.out.println("\tHealth: " + startHealth + " +" + (this.health-startHealth) + " --> " + this.health);
         System.out.println("\tEnergy: " + startEnergy + " +" + (this.energy-startEnergy) + " --> " + this.energy);
     }
@@ -214,7 +210,7 @@ abstract class Person {
             System.out.println(this.name + " attacks!\n\tZombie's Health: "+zombie.getHealth()+" -" + playerAttack);
             zombie.setHealth(zombie.getHealth()-playerAttack);
         }
-        System.out.println("You killed the zombie!");
+        System.out.println(this.name + " killed the zombie!");
         System.out.println("\tHealth: " + startHealth + " -" + totalDamage + " --> " + this.health);
         System.out.println("\tEnergy: " + this.energy + " -" + energyLoss + " --> " + (this.energy-energyLoss));
     }

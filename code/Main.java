@@ -20,9 +20,13 @@ public class Main {
         System.out.println("What character do you want to be?");
         System.out.println("1. Scavenger\n2. Medic\n3. Warrior");
         int role = input.nextInt();
+        // consume /n
+        input.nextLine();
         while (role != 1 && role != 2 && role != 3) {
             System.out.println("Invalid input. Please enter 1, 2, or 3.");
             role = input.nextInt();
+            // consume /n
+            input.nextLine();
         }
 
         // sets up null player so there's no errors relating to possibly not setting player type
@@ -61,10 +65,12 @@ public class Main {
             player.printActivityList();
             System.out.print("Activity #: ");
             choice = input.nextInt();
+            // consume /n
+            input.nextLine();
 
             // activity choice is parsed into it's respective method
             player.parseActivity(choice);
-            continueGame();
+            // continueGame();
             player.zombieFight(day);
 
             // if player died from zombie fight, break loop
@@ -95,7 +101,7 @@ public class Main {
      */
     public static void continueGame(){
         System.out.print("Press Enter to continue...");
-        String consumeResponse = input.nextLine();
+        // String consumeResponse = input.nextLine();
         input.nextLine();
         clear();
     }

@@ -24,6 +24,9 @@ class Scavenger extends Person{
 
         System.out.println("Would you like to look for... \n\t1. Food (80%)\n\t2. Weapons (70%)");
         int response = input.nextInt();
+        // consume /n
+        input.nextLine();
+
         System.out.println("You start to look around...");
         // split outputs based on what player is looking for
         switch (response){
@@ -105,6 +108,7 @@ class Scavenger extends Person{
      */
     @Override
     public void parseActivity(int choice) {
+        Main.clear();
         switch (choice) {
             case 1:
                 this.scavengeWalmart();

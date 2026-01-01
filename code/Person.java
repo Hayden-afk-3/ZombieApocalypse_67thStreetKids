@@ -163,6 +163,8 @@ abstract class Person {
 
         System.out.println("Would you like to look for... \n\t1. Food (90%)\n\t2. Weapons (30%)\n\t3. Drugs (50%)");
         int response = input.nextInt();
+        // consume /n
+        input.nextLine();
         System.out.println(name + " starts to look around...");
         // split outputs based on what player is looking for
         switch (response){

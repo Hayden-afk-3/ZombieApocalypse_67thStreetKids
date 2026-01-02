@@ -10,6 +10,21 @@ class Scavenger extends Person{
      */
     public Scavenger(String theName) {
         super(theName);
+        role = 1;
+    }
+
+    /**
+     * Detailed constructor for Scavenger class, used for loading saved games
+     * @param theDay current day
+     * @param theHealth health of the person
+     * @param theSatiation satiation of the person
+     * @param theEnergy energy of the person
+     * @param theVegan vegan/pacifist status of the person (1 for true, 0 for false)
+     * @param theName name of the person
+     */
+    public Scavenger(int theDay, int theHealth, int theSatiation, int theEnergy, int theVegan, String theName) {
+        super(theDay, theHealth, theSatiation, theEnergy, theVegan, theName);
+        role = 1;
     }
 
     /**
@@ -54,7 +69,7 @@ class Scavenger extends Person{
                 break;
             case 2:
                 if (Math.random() < 0.85){
-                    Weapon bassProWeapon = new Weapon((int)(((1-Math.pow(Math.random(),2))+0.5)*(5*Math.log(day)+7)));
+                    Weapon bassProWeapon = new Weapon((int)(((1-Math.pow(Math.random(),2))+0.5)*(5*Math.log(this.getDay())+7)));
                     System.out.println(this.getName() + " has found a weapon!");
                     System.out.println("Current weapon:");
                     this.getWeapon().weaponInfo();

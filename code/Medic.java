@@ -10,6 +10,21 @@ class Medic extends Person{
      */
     public Medic(String theName) {
         super(theName);
+        role = 2;
+    }
+
+    /**
+     * Detailed constructor for Medic class, used for loading saved games
+     * @param theDay current day
+     * @param theHealth health of the person
+     * @param theSatiation satiation of the person
+     * @param theEnergy energy of the person
+     * @param theVegan vegan/pacifist status of the person (1 for true, 0 for false)
+     * @param theName name of the person
+     */
+    public Medic(int theDay, int theHealth, int theSatiation, int theEnergy, int theVegan, String theName) {
+        super(theDay, theHealth, theSatiation, theEnergy, theVegan, theName);
+        role = 2;
     }
 
     /**

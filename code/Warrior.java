@@ -2,7 +2,7 @@ package code;
 class Warrior extends Person{
     // implements the activity's list and explanations to specific role
     private String[] activityListClass = {"Hunt for Food"};
-    private  String[] activityListExplainClass = {"Regain Satiation. Lose Energy."};
+    private String[] activityListExplainClass = {"Regain Satiation. Lose Energy."};
 
     /**
      * Constructor for Warrior class
@@ -10,13 +10,28 @@ class Warrior extends Person{
      */
     public Warrior(String theName) {
         super(theName);
+        role = 3;
+    }
+
+    /**
+     * Detailed constructor for Warrior class, used for loading saved games
+     * @param theDay current day
+     * @param theHealth health of the person
+     * @param theSatiation satiation of the person
+     * @param theEnergy energy of the person
+     * @param theVegan vegan/pacifist status of the person (1 for true, 0 for false)
+     * @param theName name of the person
+     */
+    public Warrior(int theDay, int theHealth, int theSatiation, int theEnergy, int theVegan, String theName) {
+        super(theDay, theHealth, theSatiation, theEnergy, theVegan, theName);
+        role = 3;
     }
 
     /**
      * Hunts for food
      */
     public void huntForFood() {
-        if (!vegan){
+        if (!this.getVegan()){
             System.out.println(this.getName() + " goes out to hunt for food.");
             int startEnergy = this.getEnergy();
             int startSatiation = this.getSatiation();
@@ -48,7 +63,7 @@ class Warrior extends Person{
                 System.out.println("For once, the apocalypse does not claim another heartbeat. " + this.getName() + "lets the " + foodItem + " go free.");
                 System.out.println("\nYou gain no satiation, but gain some satisfaction.");
                 System.out.println("\nYou are now a pacifist towards animals. You will no longer be able to hunt for food.");
-                vegan = true;
+                this.setVegan(true);
                 activityListClass = new String[] {};
                 activityListExplainClass = new String[] {};
             }

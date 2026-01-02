@@ -12,6 +12,9 @@ public class Weapon {
     };
     private String name;
     private int damage;
+    private int adjectiveChoice;
+    private int weaponChoice;
+    private int verbChoice;
 
     /**
      * Constructor for Weapon class
@@ -19,9 +22,29 @@ public class Weapon {
      */
     public Weapon(int theDamage) {
         // generates a name of format: [adjective] [weapon] of [verb]
-        name = adjectives[(int)(Math.random()* adjectives.length)] + " " + weapons[(int)(Math.random() * weapons.length)] + " of " + verbs[(int)(Math.random() * verbs.length)];
+        adjectiveChoice = (int)(Math.random()*(adjectives.length+1));
+        weaponChoice = (int)(Math.random()*(weapons.length+1));
+        verbChoice = (int)(Math.random()*(verbs.length+1));
+        name = adjectives[adjectiveChoice] + " " + weapons[weaponChoice] + " of " + verbs[verbChoice];
         damage = theDamage;
     }
+
+    /**
+     * Detailed constructor for Weapon class, used for loading saved games
+     * @param adjectiveChoice index of adjective in adjectives array
+     * @param weaponChoice index of weapon in weapons array
+     * @param verbChoice index of verb in verbs array
+     * @param theDamage damage assigned to the weapon
+     */
+    public Weapon(int adjectiveChoice, int weaponChoice, int verbChoice, int theDamage) {
+        // generates a name of format: [adjective] [weapon] of [verb]
+        this.adjectiveChoice = adjectiveChoice;
+        this.weaponChoice = weaponChoice;
+        this.verbChoice = verbChoice;
+        name = adjectives[adjectiveChoice] + " " + weapons[weaponChoice] + " of " + verbs[verbChoice];
+        damage = theDamage;
+    }
+    
 
     /**
      * Prints the weapon information
@@ -53,5 +76,13 @@ public class Weapon {
      */
     public void setDamage(int theDamage){
         damage = theDamage;
+    }
+
+    /**
+     * Encodes the weapon name into a string of format adjective_weapon_verb
+     * @return encoded weapon name
+     */
+    public String encodeWeaponName(){
+        return adjectiveChoice + "_" + weaponChoice + "_" + verbChoice;
     }
 }

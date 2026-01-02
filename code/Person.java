@@ -12,8 +12,10 @@ abstract class Person {
     private int health;
     private int satiation;
     private Weapon weapon;
-    public int day;
-    public boolean vegan = false;
+    private int day;
+    private boolean vegan = false;
+    public int role;
+
     public static String[] activityList = {"Scavenge Walmart","Take a Nap"};
     public static String[] activityListExplain = {"Attempt to loot a Walmart.","Regain Energy"};
 
@@ -32,6 +34,30 @@ abstract class Person {
         health = (int)(Math.random()*(89-70+1)+70); // 70-89
         satiation = (int)(Math.random()*(69-40+1)+40); // 40-69
         day = 1;
+    }
+
+    /**
+     * Detailed constructor for Person class, used for loading saved games
+     * @param theDay current day
+     * @param theHealth health of the person
+     * @param theSatiation satiation of the person
+     * @param theEnergy energy of the person
+     * @param theVegan vegan/pacifist status of the person (1 for true, 0 for false)
+     * @param theName name of the person
+     */
+    public Person(int theDay, int theHealth, int theSatiation, int theEnergy, int theVegan, String theName) {
+        day = theDay;
+        health = theHealth;
+        satiation = theSatiation;
+        energy = theEnergy;
+        if (theVegan == 1){
+            vegan = true;
+        }
+        else{
+            vegan = false;
+        }
+        name = theName;
+
     }
 
     /**
@@ -140,9 +166,9 @@ abstract class Person {
         int startHealth = this.health;
         int startSatiation = this.satiation;
 
-        this.energy = (int)(Math.random()*((this.energy+10)-this.energy+1)+this.energy);
-        this.health = (int)(Math.random()*(-0.0109*(this.health-100)*(this.health-100)+99-this.health+1)+this.health);
-        this.satiation = (int)(Math.random()*(1*(this.satiation-10)-this.satiation+1)+this.satiation);
+        this.setEnergy((int)(Math.random()*((this.energy+10)-this.energy+1)+this.energy));
+        this.setHealth((int)(Math.random()*(-0.0109*(this.health-100)*(this.health-100)+99-this.health+1)+this.health));
+        this.setSatiation((int)(Math.random()*(1*(this.satiation-10)-this.satiation+1)+this.satiation));
 
         System.out.println(this.name + " feels rested.");
         if (this.health<startHealth){
@@ -165,6 +191,39 @@ abstract class Person {
         if (this.satiation>99){
             this.satiation=99;
         }
+    }
+
+    /**
+     * Gets the current day
+     * @return current day
+     */
+    public int getDay(){
+        return day;
+    }
+
+    /**
+     * Gets the person's vegan/pacifist status
+     * @return person's vegan/pacifist status
+     */
+    public boolean getVegan(){
+        return vegan;
+    }
+    
+    /**
+     * Sets the person's vegan/pacifist status
+     */
+    public void setVegan(boolean newVegan){
+        this.vegan = newVegan;
+    }
+    
+    
+
+    /**
+     * Gets the person's role
+     * @return person's role
+     */
+    public int getRole(){
+        return role;
     }
 
     /**
@@ -299,7 +358,7 @@ abstract class Person {
      * Simulates a fight between the player and a zombie
      * @param day the current day, used to scale zombie stats
      */
-    public void zombieFight(int day) {
+    public void zombieFight() {
         int startHealth = this.health;
         int totalDamage = 0;
         int energyLoss = 0;
@@ -319,7 +378,7 @@ abstract class Person {
             this.health -= zombieAttack;
             totalDamage += zombieAttack;
             energyLoss += 2;
-            if (Main.checkDeath(this,day)){
+            if (this.checkDeath()){
                 break;
             }
             int playerAttack = (int)(this.weapon.getDamage()*(0.5*Math.random()+0.75));
@@ -340,7 +399,7 @@ abstract class Person {
      * @param day the current day
      * @return true if player is dead, false otherwise
      */
-    public boolean checkDeath(int day){
+    public boolean checkDeath(){
         if (this.getHealth()<=0){
             System.out.println(this.name+" has ran out of health! \n" + this.name + " falls over and dies from their injuries.");
             return true;

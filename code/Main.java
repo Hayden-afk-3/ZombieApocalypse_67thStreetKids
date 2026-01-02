@@ -9,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         // sets up null player so there's no errors relating to possibly not setting player type
         Person player = null;
-        int day = 1;
+        int roleChoice = 0;
+        clear();
 
         System.out.println("1. New Game\n2. Load Game");
         int gameChoice = input.nextInt();
@@ -18,9 +19,104 @@ public class Main {
         clear();
         switch (gameChoice) {
             case 2:
-                // Load Game logic
-                break;
-            default:
+                // day_role_health_satiation_energy_weaponAdjective_weaponWeapon_weaponVerb_weaponDamage_vegan_name_
+                // example: 2_1_84_58_97_7_20_23_5_0_Cooper
+                String saveDay = "";
+                String saveRole = "";
+                String saveHealth = "";
+                String saveSatiation = "";
+                String saveEnergy = "";
+                String saveWeaponAdjective = "";
+                String saveWeaponWeapon = "";
+                String saveWeaponVerb = "";
+                String saveWeaponDamage = "";
+                String saveVegan = "";
+                String saveName = "";
+                int currentIndex = 0;
+
+                System.out.print("Enter your saved game string: ");
+                String savedGameString = input.nextLine();
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveDay += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveRole += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveHealth += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveSatiation += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveEnergy += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveWeaponAdjective += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveWeaponWeapon += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveWeaponVerb += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveWeaponDamage += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (savedGameString.charAt(currentIndex) != '_'){
+                    saveVegan += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                currentIndex++;
+
+                while (currentIndex < savedGameString.length()){
+                    saveName += savedGameString.charAt(currentIndex);
+                    currentIndex++;
+                }
+                
+                switch (saveRole) {
+                    case "1":
+                        player = new Scavenger(Integer.valueOf(saveDay), Integer.valueOf(saveHealth), Integer.valueOf(saveSatiation), Integer.valueOf(saveEnergy), Integer.valueOf(saveVegan), saveName);
+                        break;
+                    case "2":
+                        player = new Medic(Integer.valueOf(saveDay), Integer.valueOf(saveHealth), Integer.valueOf(saveSatiation), Integer.valueOf(saveEnergy), Integer.valueOf(saveVegan), saveName);
+                        break;
+                    case "3":
+                        player = new Warrior(Integer.valueOf(saveDay), Integer.valueOf(saveHealth), Integer.valueOf(saveSatiation), Integer.valueOf(saveEnergy), Integer.valueOf(saveVegan), saveName);
+                        break;
+                }
+                player.setWeapon(new Weapon(Integer.valueOf(saveWeaponAdjective), Integer.valueOf(saveWeaponWeapon), Integer.valueOf(saveWeaponVerb), Integer.valueOf(saveWeaponDamage)));
+                clear();
+            break;
+            case 1:
                 // grab name from user
                 System.out.print("Enter your name: ");
                 String name = input.nextLine();
@@ -29,17 +125,17 @@ public class Main {
                 // grabs role from user and verifies input
                 System.out.println("What character do you want to be?");
                 System.out.println("1. Scavenger\n2. Medic\n3. Warrior");
-                int role = input.nextInt();
+                roleChoice = input.nextInt();
                 // consume /n
                 input.nextLine();
-                while (role != 1 && role != 2 && role != 3) {
+                while (roleChoice != 1 && roleChoice != 2 && roleChoice != 3) {
                     System.out.println("Invalid input. Please enter 1, 2, or 3.");
-                    role = input.nextInt();
+                    roleChoice = input.nextInt();
                     // consume /n
                     input.nextLine();
                 }
                         // switch case that uses each role's constructor to set player type
-                switch (role) {
+                switch (roleChoice) {
                     case 1:
                         player = new Scavenger(name);
                         break;
@@ -52,8 +148,8 @@ public class Main {
                 }
                 clear();
 
-                // switch case that uses each role's constructor to set player type
-                switch (role) {
+                // switch case that uses each roleChoice's constructor to set player type
+                switch (roleChoice) {
                     case 1:
                         player = new Scavenger(name);
                         break;
@@ -73,26 +169,15 @@ public class Main {
                 continueGame();
                 break;
         }
-
-        // initialize variables
-        
-        
-
-        // player gets assigned weapon
-        System.out.println(player.getName() + " has found a weapon!");
-        player.setWeapon(new Weapon(5));
-        player.getWeapon().weaponInfo();
-        continueGame();
-
         // main game loop
         while (true){
             // if player is dead, break loop
-            if (checkDeath(player,day)){
+            if (player.checkDeath()){
                 break;
             }
 
             // daily activities
-            System.out.println("Day " + day);
+            System.out.println("Day " + player.getDay());
             player.personStatus();
             player.printActivityList();
             System.out.print("Activity #: ");
@@ -103,10 +188,10 @@ public class Main {
             // activity choice is parsed into it's respective method
             player.parseActivity(choice);
             continueGame();
-            player.zombieFight(day);
+            player.zombieFight();
 
             // if player died from zombie fight, break loop
-            if (checkDeath(player,day)){
+            if (player.checkDeath()){
                 break;
             }
             continueGame();
@@ -114,10 +199,31 @@ public class Main {
             // player sleep method increases stats and day increments
             player.sleep();
             continueGame();
-            day++;
+
+            System.out.println("Would you like to quit your game?");
+            boolean quitGame = false;
+            switch (input.nextLine()) {
+                case "Yes", "yes", "y":
+                    quitGame = true;
+                    String gameString = encodeGame(player);
+                    System.out.println("Game saved! Encoded string:");
+                    System.out.println(gameString);
+                    break;
+                case "No", "no", "n":
+                    quitGame = false;
+                    clear();
+                    break;
+                default:
+                    quitGame = false;
+                    clear();
+                    break;
+            }
+            //continueGame();
+            if (quitGame){
+                break;
+            }
         }
         input.close();
-        System.out.println("You survived until Day " + day + ".");
     }
 
 
@@ -138,27 +244,29 @@ public class Main {
         input.nextLine();
         clear();
     }
+
     /**
-     * checks if player is dead
+     * encodes the game state into a string for saving
      * @param player the player object
-     * @param day the current day
-     * @return true if player is dead, false otherwise
+     * @return encoded game string
      */
-    public static boolean checkDeath(Person player, int day){
-        if (player.getHealth()<=0){
-            System.out.println(player.getName()+" has ran out of health! \n" + player.getName() + " falls over and dies from their injuries.");
-            return true;
+    public static String encodeGame(Person player){
+        String returnString = "";
+        // day_role_health_satiation_energy_weaponNameEncode_weaponDamage_vegan_name
+        returnString += player.getDay() + "_";
+        returnString += player.getRole() + "_";
+        returnString += player.getHealth() + "_";
+        returnString += player.getSatiation() + "_";
+        returnString += player.getEnergy() + "_";
+        returnString += player.getWeapon().encodeWeaponName() + "_";
+        returnString += player.getWeapon().getDamage() + "_";
+        if (player.getVegan()){
+            returnString += "1_";
         }
-        else if (player.getSatiation()<=0){
-            System.out.println(player.getName()+" has ran out of satiation! \n" + player.getName() + " falls over and dies from starvation.");
-            return true;
+        else {
+            returnString += "0_";
         }
-        else if (player.getEnergy()<=0){
-            System.out.println(player.getName()+" has ran out of energy! \n" + player.getName() + " falls over and dies from being exhausted.");
-            return true;
-        }
-        else{
-            return false;
-        }
+        returnString += player.getName();
+        return returnString;
     }
 }
